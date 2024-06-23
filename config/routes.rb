@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'species/index'
+  get 'species/show'
   get 'starships/index'
   get 'starships/show'
   get 'films/index'
@@ -16,4 +18,5 @@ Rails.application.routes.draw do
   resources :films, only: [:index, :show]
   resources :vehicles, only: [:index, :show]
   resources :starships, only: [:index, :show]
+  resources :species, only: [:index, :show]
 end

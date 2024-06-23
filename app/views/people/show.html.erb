@@ -7,5 +7,29 @@
 <p>Birth Year: <%= @person['birth_year'] %></p>
 <p>Gender: <%= @person['gender'] %></p>
 
+<h2>Homeworld</h2>
+<p><%= link_to @homeworld['name'], planet_path(@homeworld['url'].split('/').last) %></p>
+
+<h2>Films</h2>
+<ul>
+  <% @films.each do |film| %>
+    <li><%= link_to film['title'], film_path(film['url'].split('/').last) %></li>
+  <% end %>
+</ul>
+
+<h2>Vehicles</h2>
+<ul>
+  <% @vehicles.each do |vehicle| %>
+    <li><%= link_to vehicle['name'], vehicle_path(vehicle['url'].split('/').last) %></li>
+  <% end %>
+</ul>
+
+<h2>Starships</h2>
+<ul>
+  <% @starships.each do |starship| %>
+    <li><%= link_to starship['name'], starship_path(starship['url'].split('/').last) %></li>
+  <% end %>
+</ul>
+
 <%= link_to 'Back to People', people_path %> |
 <%= link_to 'Back to Home', root_path %>
