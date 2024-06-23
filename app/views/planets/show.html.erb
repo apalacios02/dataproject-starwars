@@ -1,12 +1,32 @@
 <h1><%= @planet['name'] %></h1>
-<p>Climate: <%= @planet['climate'] %></p>
-<p>Diameter: <%= @planet['diameter'] %></p>
-<p>Gravity: <%= @planet['gravity'] %></p>
-<p>Orbital Period: <%= @planet['orbital_period'] %></p>
-<p>Population: <%= @planet['population'] %></p>
 <p>Rotation Period: <%= @planet['rotation_period'] %></p>
-<p>Surface Water: <%= @planet['surface_water'] %></p>
+<p>Orbital Period: <%= @planet['orbital_period'] %></p>
+<p>Diameter: <%= @planet['diameter'] %></p>
+<p>Climate: <%= @planet['climate'] %></p>
+<p>Gravity: <%= @planet['gravity'] %></p>
 <p>Terrain: <%= @planet['terrain'] %></p>
+
+<h2>Residents</h2>
+<% if @residents.any? %>
+  <ul>
+    <% @residents.each do |resident| %>
+      <li><%= link_to resident['name'], person_path(resident['url'].split('/').last) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No residents available.</p>
+<% end %>
+
+<h2>Films</h2>
+<% if @films.any? %>
+  <ul>
+    <% @films.each do |film| %>
+      <li><%= link_to film['title'], film_path(film['url'].split('/').last) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No films available.</p>
+<% end %>
 
 <%= link_to 'Back to Planets', planets_path %> |
 <%= link_to 'Back to Home', root_path %>
