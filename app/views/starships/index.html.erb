@@ -1,0 +1,8 @@
+<h1>Starships</h1>
+<ul>
+  <% @starships['results'].each do |starship| %>
+    <li>
+      <%= link_to starship['name'], starship_path(starship['url'].split('/').last) %>
+    </li>
+  <% end %>
+</ul>
