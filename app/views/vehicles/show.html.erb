@@ -1,14 +1,31 @@
 <h1><%= @vehicle['name'] %></h1>
 <p>Model: <%= @vehicle['model'] %></p>
 <p>Manufacturer: <%= @vehicle['manufacturer'] %></p>
+<p>Vehicle Class: <%= @vehicle['vehicle_class'] %></p>
 <p>Cost in Credits: <%= @vehicle['cost_in_credits'] %></p>
 <p>Length: <%= @vehicle['length'] %></p>
-<p>Max Atmosphering Speed: <%= @vehicle['max_atmosphering_speed'] %></p>
-<p>Crew: <%= @vehicle['crew'] %></p>
-<p>Passengers: <%= @vehicle['passengers'] %></p>
-<p>Cargo Capacity: <%= @vehicle['cargo_capacity'] %></p>
-<p>Consumables: <%= @vehicle['consumables'] %></p>
-<p>Vehicle Class: <%= @vehicle['vehicle_class'] %></p>
+
+<h2>Pilots</h2>
+<% if @pilots.any? %>
+  <ul>
+    <% @pilots.each do |pilot| %>
+      <li><%= link_to pilot['name'], person_path(pilot['url'].split('/').last) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No pilots available.</p>
+<% end %>
+
+<h2>Films</h2>
+<% if @films.any? %>
+  <ul>
+    <% @films.each do |film| %>
+      <li><%= link_to film['title'], film_path(film['url'].split('/').last) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No films available.</p>
+<% end %>
 
 <%= link_to 'Back to Vehicles', vehicles_path %> |
 <%= link_to 'Back to Home', root_path %>
