@@ -1,0 +1,8 @@
+<h1>Films</h1>
+<ul>
+  <% @films['results'].each do |film| %>
+    <li>
+      <%= link_to film['title'], film_path(film['url'].split('/').last) %>
+    </li>
+  <% end %>
+</ul>

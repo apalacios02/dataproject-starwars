@@ -1,0 +1,8 @@
+<h1>Planets</h1>
+<ul>
+  <% @planets['results'].each do |planet| %>
+    <li>
+      <%= link_to planet['name'], planet_path(planet['url'].split('/').last) %>
+    </li>
+  <% end %>
+</ul>
