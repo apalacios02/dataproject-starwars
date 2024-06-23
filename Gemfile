@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "httparty", "~> 0.22.0"
+
+gem "tailwindcss-rails", "~> 2.6"
