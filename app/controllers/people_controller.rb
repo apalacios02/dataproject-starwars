@@ -2,10 +2,14 @@ class PeopleController < ApplicationController
   before_action :set_person, only: [:show]
 
   def index
+<<<<<<< HEAD
     page = params[:page].to_i.zero? ? 1 : params[:page].to_i
     @people = fetch_all_people(page)
     @total_pages = total_pages
     @current_page = page
+=======
+    @people = Kaminari.paginate_array(fetch_all_people).page(params[:page]).per(10)
+>>>>>>> cb73fbefc9a855f4f934ffc8d33b2516d6c141e8
   end
 
   def show
