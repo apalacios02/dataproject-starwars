@@ -21,6 +21,25 @@
       </ul>
     </section>
 
+    <!-- Pagination -->
+    <div class="flex justify-between mt-6">
+      <div class="flex-1">
+        <% if @current_page > 1 %>
+          <%= link_to 'Previous', people_path(page: @current_page - 1), class: "text-blue-500 hover:underline" %>
+        <% end %>
+      </div>
+      <div class="flex-1 text-center">
+        <% (1..@total_pages).each do |num| %>
+          <%= link_to num, people_path(page: num), class: "mx-1 px-4 py-2 inline-block rounded-lg bg-white text-blue-500 hover:bg-blue-500 hover:text-white hover:shadow" %>
+        <% end %>
+      </div>
+      <div class="flex-1 text-right">
+        <% if @current_page < @total_pages %>
+          <%= link_to 'Next', people_path(page: @current_page + 1), class: "text-blue-500 hover:underline" %>
+        <% end %>
+      </div>
+    </div>
+
     <footer class="mt-8">
       <%= link_to 'Back to Home', root_path, class: "text-blue-500 hover:underline" %>
     </footer>
