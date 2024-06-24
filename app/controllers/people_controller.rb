@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   def index
-    @people = StarWarsApi.get_resource('people')
+    @people = fetch_all_people
   end
 
   def show
@@ -9,5 +9,19 @@ class PeopleController < ApplicationController
     @vehicles = @person['vehicles'].map { |url| StarWarsApi.get_resource_by_url(url) }
     @starships = @person['starships'].map { |url| StarWarsApi.get_resource_by_url(url) }
     @homeworld = StarWarsApi.get_resource_by_url(@person['homeworld'])
+  end
+
+  private
+
+  def fetch_all_people
+    people = []
+    url = 'https://swapi.dev/api/people/'
+    while url
+      response = HTTParty.get(url)
+      data = response.parsed_response
+      people.concat(data['results'])
+      url = data['next']
+    end
+    people
   end
 end
