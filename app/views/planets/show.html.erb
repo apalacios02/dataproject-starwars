@@ -1,32 +1,53 @@
-<h1><%= @planet['name'] %></h1>
-<p>Rotation Period: <%= @planet['rotation_period'] %></p>
-<p>Orbital Period: <%= @planet['orbital_period'] %></p>
-<p>Diameter: <%= @planet['diameter'] %></p>
-<p>Climate: <%= @planet['climate'] %></p>
-<p>Gravity: <%= @planet['gravity'] %></p>
-<p>Terrain: <%= @planet['terrain'] %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @planet['name'] %></title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
 
-<h2>Residents</h2>
-<% if @residents.any? %>
-  <ul>
-    <% @residents.each do |resident| %>
-      <li><%= link_to resident['name'], person_path(resident['url'].split('/').last) %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No residents available.</p>
-<% end %>
+  <div class="container mx-auto p-6">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold"><%= @planet['name'] %></h1>
+    </header>
 
-<h2>Films</h2>
-<% if @films.any? %>
-  <ul>
-    <% @films.each do |film| %>
-      <li><%= link_to film['title'], film_path(film['url'].split('/').last) %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No films available.</p>
-<% end %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section class="mb-6">
+        <h2 class="text-xl font-semibold">Details</h2>
+        <p><strong>Rotation Period:</strong> <%= @planet['rotation_period'] %> hours</p>
+        <p><strong>Orbital Period:</strong> <%= @planet['orbital_period'] %> days</p>
+        <p><strong>Diameter:</strong> <%= @planet['diameter'] %> km</p>
+        <p><strong>Climate:</strong> <%= @planet['climate'] %></p>
+        <p><strong>Gravity:</strong> <%= @planet['gravity'] %></p>
+        <p><strong>Terrain:</strong> <%= @planet['terrain'] %></p>
+        <p><strong>Surface Water:</strong> <%= @planet['surface_water'] %>%</p>
+        <p><strong>Population:</strong> <%= @planet['population'] %></p>
+      </section>
 
-<%= link_to 'Back to Planets', planets_path %> |
-<%= link_to 'Back to Home', root_path %>
+      <section class="mb-6">
+        <h2 class="text-xl font-semibold">Residents</h2>
+        <ul class="list-disc list-inside">
+          <% @residents.each do |resident| %>
+            <li><%= link_to resident['name'], person_path(resident['url'].split('/').last), class: "text-blue-500 hover:underline" %></li>
+          <% end %>
+        </ul>
+
+        <h2 class="text-xl font-semibold mt-6">Films</h2>
+        <ul class="list-disc list-inside">
+          <% @films.each do |film| %>
+            <li><%= link_to film['title'], film_path(film['url'].split('/').last), class: "text-blue-500 hover:underline" %></li>
+          <% end %>
+        </ul>
+      </section>
+    </div>
+
+    <footer class="mt-8">
+      <%= link_to 'Back to Planets', planets_path, class: "text-blue-500 hover:underline" %> |
+      <%= link_to 'Back to Home', root_path, class: "text-blue-500 hover:underline" %>
+    </footer>
+  </div>
+
+</body>
+</html>
