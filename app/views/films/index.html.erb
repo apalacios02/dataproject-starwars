@@ -1,10 +1,28 @@
-<h1>Films</h1>
-<ul>
-  <% @films['results'].each do |film| %>
-    <li>
-      <%= link_to film['title'], film_path(film['url'].split('/').last) %>
-    </li>
-  <% end %>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Films</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
 
-<%= link_to 'Back to Home', root_path %>
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Films</h1>
+
+    <ul class="divide-y divide-gray-300">
+      <% @films['results'].each do |film| %>
+        <li class="py-4">
+          <%= link_to film['title'], film_path(film['url'].split('/').last), class: "text-blue-500 hover:underline" %>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="mt-8">
+      <%= link_to 'Back to Home', root_path, class: "text-blue-500 hover:underline" %>
+    </div>
+  </div>
+
+</body>
+</html>
