@@ -2,14 +2,10 @@ class PeopleController < ApplicationController
   before_action :set_person, only: [:show]
 
   def index
-<<<<<<< HEAD
-    page = params[:page].to_i.zero? ? 1 : params[:page].to_i
+    page = params[:page].to_i.positive? ? params[:page].to_i : 1
     @people = fetch_all_people(page)
     @total_pages = total_pages
     @current_page = page
-=======
-    @people = Kaminari.paginate_array(fetch_all_people).page(params[:page]).per(10)
->>>>>>> cb73fbefc9a855f4f934ffc8d33b2516d6c141e8
   end
 
   def show
@@ -21,7 +17,7 @@ class PeopleController < ApplicationController
 
   private
 
-  def fetch_all_people(page = 1)
+  def fetch_all_people(page)
     people = []
     url = "https://swapi.dev/api/people/?page=#{page}"
     response = HTTParty.get(url)
@@ -29,7 +25,7 @@ class PeopleController < ApplicationController
       data = response.parsed_response
       people = data['results']
     else
-      flash[:alert] = 'Failed to fetch people from Star Wars API'
+      flash.now[:alert] = 'Failed to fetch people from Star Wars API'
     end
     people
   end
@@ -42,7 +38,7 @@ class PeopleController < ApplicationController
       total_count = data['count']
       total_pages = (total_count.to_f / 10).ceil  # Assuming 10 results per page based on SWAPI default
     else
-      flash[:alert] = 'Failed to fetch total number of people from Star Wars API'
+      flash.now[:alert] = 'Failed to fetch total number of people from Star Wars API'
       total_pages = 1  # Default to 1 page if API request fails
     end
     total_pages

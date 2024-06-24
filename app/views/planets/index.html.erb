@@ -1,10 +1,15 @@
-<h1>Planets</h1>
-<ul>
-  <% @planets['results'].each do |planet| %>
-    <li>
-      <%= link_to planet['name'], planet_path(planet['url'].split('/').last) %>
-    </li>
-  <% end %>
-</ul>
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+  <h1 class="text-3xl font-bold mb-8">Planets</h1>
 
-<%= link_to 'Back to Home', root_path %>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full bg-white shadow-lg rounded-lg p-4">
+    <% @planets['results'].each do |planet| %>
+      <div class="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-300">
+        <%= link_to planet['name'], planet_path(planet['url'].split('/').last), class: "block text-blue-500 hover:text-blue-700 font-medium" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-8">
+    <%= link_to 'Back to Home', root_path, class: "text-gray-500 hover:text-gray-700" %>
+  </div>
+</div>
