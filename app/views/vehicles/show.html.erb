@@ -1,31 +1,51 @@
-<h1><%= @vehicle['name'] %></h1>
-<p>Model: <%= @vehicle['model'] %></p>
-<p>Manufacturer: <%= @vehicle['manufacturer'] %></p>
-<p>Vehicle Class: <%= @vehicle['vehicle_class'] %></p>
-<p>Cost in Credits: <%= @vehicle['cost_in_credits'] %></p>
-<p>Length: <%= @vehicle['length'] %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @vehicle['name'] %></title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
 
-<h2>Pilots</h2>
-<% if @pilots.any? %>
-  <ul>
-    <% @pilots.each do |pilot| %>
-      <li><%= link_to pilot['name'], person_path(pilot['url'].split('/').last) %></li>
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6"><%= @vehicle['name'] %></h1>
+
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <p><strong>Model:</strong> <%= @vehicle['model'] %></p>
+      <p><strong>Manufacturer:</strong> <%= @vehicle['manufacturer'] %></p>
+      <p><strong>Vehicle Class:</strong> <%= @vehicle['vehicle_class'] %></p>
+      <p><strong>Cost in Credits:</strong> <%= @vehicle['cost_in_credits'] %></p>
+      <p><strong>Length:</strong> <%= @vehicle['length'] %></p>
+    </div>
+
+    <h2 class="text-xl font-semibold">Pilots</h2>
+    <% if @pilots.any? %>
+      <ul class="list-disc list-inside mb-6">
+        <% @pilots.each do |pilot| %>
+          <li><%= link_to pilot['name'], person_path(pilot['url'].split('/').last), class: "text-blue-500 hover:underline" %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No pilots available.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>No pilots available.</p>
-<% end %>
 
-<h2>Films</h2>
-<% if @films.any? %>
-  <ul>
-    <% @films.each do |film| %>
-      <li><%= link_to film['title'], film_path(film['url'].split('/').last) %></li>
+    <h2 class="text-xl font-semibold">Films</h2>
+    <% if @films.any? %>
+      <ul class="list-disc list-inside">
+        <% @films.each do |film| %>
+          <li><%= link_to film['title'], film_path(film['url'].split('/').last), class: "text-blue-500 hover:underline" %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No films available.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>No films available.</p>
-<% end %>
 
-<%= link_to 'Back to Vehicles', vehicles_path %> |
-<%= link_to 'Back to Home', root_path %>
+    <div class="mt-8">
+      <%= link_to 'Back to Vehicles', vehicles_path, class: "text-blue-500 hover:underline" %> |
+      <%= link_to 'Back to Home', root_path, class: "text-blue-500 hover:underline" %>
+    </div>
+  </div>
+
+</body>
+</html>
