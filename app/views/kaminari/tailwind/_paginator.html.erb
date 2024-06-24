@@ -1,0 +1,25 @@
+<div class="flex items-center justify-center">
+  <%= first_page_tag unless current_page.first? %>
+  <%= prev_page_tag unless current_page.first? %>
+
+  <% paginator.each_page do |page| %>
+    <% if page.left_outer? || page.right_outer? || page.inside_window? %>
+      <%= page_link_or_span page, class: 'px-3 py-1 mx-1 text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white' %>
+    <% elsif page.was_truncated? %>
+      <span class="mx-1">...</span>
+    <% end %>
+  <% end %>
+
+  <%= next_page_tag unless current_page.last? %>
+  <%= last_page_tag unless current_page.last? %>
+</div>
+
+<% if page.current? %>
+  <span class="px-3 py-1 mx-1 text-white bg-blue-500 rounded"><%= page.number %></span>
+<% else %>
+  <%= link_to page.number, page.url, class: "px-3 py-1 mx-1 text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+<% end %>
+
+<%= link_to I18n.t('views.pagination.next'), next_page.url, class: "px-3 py-1 mx-1 text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white" %>
+
+<%= link_to I18n.t('views.pagination.previous'), prev_page.url, class: "px-3 py-1 mx-1 text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white" %>

@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   def index
-    @people = fetch_all_people
+    @people = Kaminari.paginate_array(fetch_all_people).page(params[:page]).per(10)
   end
 
   def show
