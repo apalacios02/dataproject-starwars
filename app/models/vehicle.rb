@@ -3,6 +3,14 @@ class Vehicle < ApplicationRecord
     has_and_belongs_to_many :films
     has_and_belongs_to_many :pilots
   
+    # Validations
+    validates :name, presence: true, uniqueness: true
+    validates :model, presence: true
+    validates :manufacturer, presence: true
+    validates :vehicle_class, presence: true
+    validates :cost_in_credits, presence: true
+    validates :length, presence: true
+  
     # Class Method to fetch vehicles from API
     def self.fetch_vehicles(page = 1)
       vehicles = []
@@ -12,7 +20,7 @@ class Vehicle < ApplicationRecord
         data = response.parsed_response
         data['results'].each do |vehicle_data|
           vehicle = Vehicle.find_or_initialize_by(name: vehicle_data['name'])
-          vehicle.update_attributes(
+          vehicle.update(
             model: vehicle_data['model'],
             manufacturer: vehicle_data['manufacturer'],
             vehicle_class: vehicle_data['vehicle_class'],
