@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_184555) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_190243) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -63,6 +63,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_184555) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "films", force: :cascade do |t|
+    t.string "title"
+    t.string "director"
+    t.string "producer"
+    t.date "release_date"
+    t.text "opening_crawl"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people", force: :cascade do |t|
