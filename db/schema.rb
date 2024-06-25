@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_190920) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_191415) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -102,6 +102,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_190920) do
     t.integer "diameter"
     t.string "gravity"
     t.integer "surface_water"
+  end
+
+  create_table "starships", force: :cascade do |t|
+    t.string "model"
+    t.string "manufacturer"
+    t.string "starship_class"
+    t.string "cost_in_credits"
+    t.string "length"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "vehicles", force: :cascade do |t|
