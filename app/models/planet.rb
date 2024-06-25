@@ -1,9 +1,14 @@
 class Planet < ApplicationRecord
+    # Validations
     validates :name, presence: true, uniqueness: true
     validates :climate, presence: true
     validates :terrain, presence: true
     validates :population, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
     validates :rotation_period, :orbital_period, :diameter, :surface_water, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  
+    # Associations
+    has_and_belongs_to_many :films
+    has_many :residents, class_name: 'Person', foreign_key: 'homeworld_id'
   
     def self.fetch_from_api_and_create(id)
       planet_data = StarWarsApi.get_planet(id)
@@ -37,3 +42,4 @@ class Planet < ApplicationRecord
       end
     end
   end
+  
