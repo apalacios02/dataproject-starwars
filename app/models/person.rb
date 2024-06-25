@@ -1,4 +1,13 @@
 class Person < ApplicationRecord
+    validates :name, presence: true
+    validates :height, presence: true
+    validates :mass, presence: true
+    validates :hair_color, presence: true
+    validates :skin_color, presence: true
+    validates :eye_color, presence: true
+    validates :birth_year, presence: true
+    validates :gender, presence: true
+  
     # Method to retrieve homeworld information
     def homeworld
       @homeworld ||= StarWarsApi.get_resource_by_url(homeworld_url)
