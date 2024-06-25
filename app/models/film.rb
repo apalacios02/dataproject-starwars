@@ -5,6 +5,13 @@ class Film < ApplicationRecord
     has_and_belongs_to_many :starships
     has_and_belongs_to_many :vehicles
   
+    # Validations
+    validates :title, presence: true, uniqueness: true
+    validates :director, presence: true
+    validates :producer, presence: true
+    validates :release_date, presence: true
+    validates :opening_crawl, presence: true
+  
     # Class Method to fetch films from API
     def self.fetch_films(page = 1)
       films = []
@@ -14,7 +21,7 @@ class Film < ApplicationRecord
         data = response.parsed_response
         data['results'].each do |film_data|
           film = Film.find_or_initialize_by(title: film_data['title'])
-          film.update_attributes(
+          film.update(
             director: film_data['director'],
             producer: film_data['producer'],
             release_date: film_data['release_date'],
@@ -28,3 +35,4 @@ class Film < ApplicationRecord
       films
     end
   end
+  
