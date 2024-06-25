@@ -13,6 +13,12 @@
     <h1 class="text-3xl font-bold">People</h1>
   </header>
 
+  <!-- Tabs -->
+  <div class="mb-6">
+    <%= link_to 'All People', people_path, class: "inline-block px-4 py-2 rounded-lg bg-white text-blue-500 hover:bg-blue-500 hover:text-white hover:shadow" %>
+    <%= link_to 'Jedi', people_path(type: 'jedi'), class: "inline-block px-4 py-2 rounded-lg bg-white text-blue-500 hover:bg-blue-500 hover:text-white hover:shadow" %>
+  </div>
+
   <!-- Search Form -->
   <form action="/people" method="GET" class="mb-6">
     <div class="flex">
