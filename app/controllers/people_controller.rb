@@ -6,6 +6,8 @@ class PeopleController < ApplicationController
       @people = search_people(params[:query])
     elsif params[:type] == 'jedi'
       @people = fetch_jedi_people
+    elsif params[:type] == 'sith'
+      @people = fetch_sith_people
     else
       page = params[:page].to_i.positive? ? params[:page].to_i : 1
       @people = fetch_all_people(page)
@@ -21,6 +23,7 @@ class PeopleController < ApplicationController
     @starships = @person['starships'].map { |url| StarWarsApi.get_resource_by_url(url) }
     @homeworld = StarWarsApi.get_resource_by_url(@person['homeworld'])
     @is_jedi = jedi_names.include?(@person['name'])
+    @is_sith = sith_names.include?(@person['name'])
   end
 
   private
@@ -81,9 +84,30 @@ class PeopleController < ApplicationController
     people
   end
 
+  def fetch_sith_people
+    people = []
+    sith_list = sith_names
+    sith_list.each do |sith|
+      url = "https://swapi.dev/api/people/?search=#{sith}"
+      response = HTTParty.get(url)
+      if response.success?
+        data = response.parsed_response
+        people.concat(data['results'])
+      else
+        flash.now[:alert] = 'Failed to fetch Sith from Star Wars API'
+      end
+    end
+    people
+  end
+
   def jedi_names
     # List of known Jedi names. This list can be extended or modified based on the dataset or API
     ["Luke Skywalker", "Obi-Wan Kenobi", "Yoda", "Mace Windu", "Anakin Skywalker", "Rey", "Qui-Gon Jinn"]
+  end
+
+  def sith_names
+    # List of known Sith names. This list can be extended or modified based on the dataset or API
+    ["Darth Vader", "Darth Sidious", "Darth Maul", "Count Dooku", "Darth Plagueis", "Kylo Ren"]
   end
 
   def set_person
