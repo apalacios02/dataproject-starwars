@@ -3,6 +3,14 @@ class Starship < ApplicationRecord
     has_and_belongs_to_many :films
     has_and_belongs_to_many :pilots
   
+    # Validations
+    validates :name, presence: true, uniqueness: true
+    validates :model, presence: true
+    validates :manufacturer, presence: true
+    validates :starship_class, presence: true
+    validates :cost_in_credits, presence: true
+    validates :length, presence: true, numericality: { greater_than: 0 }
+  
     # Class Method to fetch starships from API
     def self.fetch_starships(page = 1)
       starships = []
@@ -12,7 +20,7 @@ class Starship < ApplicationRecord
         data = response.parsed_response
         data['results'].each do |starship_data|
           starship = Starship.find_or_initialize_by(name: starship_data['name'])
-          starship.update_attributes(
+          starship.update(
             model: starship_data['model'],
             manufacturer: starship_data['manufacturer'],
             starship_class: starship_data['starship_class'],
