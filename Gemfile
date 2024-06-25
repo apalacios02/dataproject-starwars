@@ -71,3 +71,7 @@ gem "httparty", "~> 0.22.0"
 gem "tailwindcss-rails", "~> 2.6"
 
 gem "kaminari", "~> 1.2"
+
+gem "image_processing", "~> 1.12"
+
+gem "activeadmin", "~> 3.2"

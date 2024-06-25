@@ -6,4 +6,12 @@ class Jedi < ApplicationRecord
   
     # Example association (assuming people have a homeworld)
     belongs_to :homeworld, class_name: 'Planet', foreign_key: 'homeworld_id'
+  
+    # Active Storage association
+    has_one_attached :image
+  
+    # Add any additional methods or scopes as needed
+    def wield_lightsaber
+      "#{name} wields a #{lightsaber_color} lightsaber."
+    end
   end
