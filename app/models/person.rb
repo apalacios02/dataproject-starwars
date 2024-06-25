@@ -1,4 +1,5 @@
 class Person < ApplicationRecord
+     # Validations
     validates :name, presence: true
     validates :height, presence: true
     validates :mass, presence: true
@@ -7,6 +8,12 @@ class Person < ApplicationRecord
     validates :eye_color, presence: true
     validates :birth_year, presence: true
     validates :gender, presence: true
+  
+    # Associations
+    has_and_belongs_to_many :films
+    belongs_to :homeworld, class_name: 'Planet', foreign_key: 'homeworld_id', optional: true
+    has_and_belongs_to_many :vehicles
+    has_and_belongs_to_many :starships
   
     # Method to retrieve homeworld information
     def homeworld
