@@ -2,10 +2,15 @@ class PeopleController < ApplicationController
   before_action :set_person, only: [:show]
 
   def index
-    page = params[:page].to_i.positive? ? params[:page].to_i : 1
-    @people = fetch_all_people(page)
+    if params[:query].present?
+      @people = search_people(params[:query])
+    else
+      page = params[:page].to_i.positive? ? params[:page].to_i : 1
+      @people = fetch_all_people(page)
+    end
+
     @total_pages = total_pages
-    @current_page = page
+    @current_page = params[:page].to_i.positive? ? params[:page].to_i : 1
   end
 
   def show
@@ -42,6 +47,19 @@ class PeopleController < ApplicationController
       total_pages = 1  # Default to 1 page if API request fails
     end
     total_pages
+  end
+
+  def search_people(query)
+    people = []
+    url = "https://swapi.dev/api/people/?search=#{query}"
+    response = HTTParty.get(url)
+    if response.success?
+      data = response.parsed_response
+      people = data['results']
+    else
+      flash.now[:alert] = 'Failed to search people from Star Wars API'
+    end
+    people
   end
 
   def set_person

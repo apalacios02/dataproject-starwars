@@ -8,10 +8,19 @@
 </head>
 <body class="bg-gray-100 text-gray-900">
 
- <div class="container mx-auto p-6">
+<div class="container mx-auto p-6">
   <header class="mb-8">
     <h1 class="text-3xl font-bold">People</h1>
   </header>
+
+  <!-- Search Form -->
+  <form action="/people" method="GET" class="mb-6">
+    <div class="flex">
+      <input type="text" name="query" placeholder="Search by name..." class="rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm border border-gray-300">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-600">Search</button>
+    </div>
+  </form>
+  <!-- End Search Form -->
 
   <section class="mb-6">
     <ul class="list-disc list-inside">
@@ -21,29 +30,29 @@
     </ul>
   </section>
 
-    <!-- Pagination -->
-    <div class="flex justify-between mt-6">
-      <div class="flex-1">
-        <% if @current_page > 1 %>
-          <%= link_to 'Previous', people_path(page: @current_page - 1), class: "text-blue-500 hover:underline" %>
-        <% end %>
-      </div>
-      <div class="flex-1 text-center">
-        <% (1..@total_pages).each do |num| %>
-          <%= link_to num, people_path(page: num), class: "mx-1 px-4 py-2 inline-block rounded-lg bg-white text-blue-500 hover:bg-blue-500 hover:text-white hover:shadow" %>
-        <% end %>
-      </div>
-      <div class="flex-1 text-right">
-        <% if @current_page < @total_pages %>
-          <%= link_to 'Next', people_path(page: @current_page + 1), class: "text-blue-500 hover:underline" %>
-        <% end %>
-      </div>
+  <!-- Pagination -->
+  <div class="flex justify-between mt-6">
+    <div class="flex-1">
+      <% if @current_page > 1 %>
+        <%= link_to 'Previous', people_path(page: @current_page - 1), class: "text-blue-500 hover:underline" %>
+      <% end %>
     </div>
-
-    <footer class="mt-8">
-      <%= link_to 'Back to Home', root_path, class: "text-blue-500 hover:underline" %>
-    </footer>
+    <div class="flex-1 text-center">
+      <% (1..@total_pages).each do |num| %>
+        <%= link_to num, people_path(page: num), class: "mx-1 px-4 py-2 inline-block rounded-lg bg-white text-blue-500 hover:bg-blue-500 hover:text-white hover:shadow" %>
+      <% end %>
+    </div>
+    <div class="flex-1 text-right">
+      <% if @current_page < @total_pages %>
+        <%= link_to 'Next', people_path(page: @current_page + 1), class: "text-blue-500 hover:underline" %>
+      <% end %>
+    </div>
   </div>
+
+  <footer class="mt-8">
+    <%= link_to 'Back to Home', root_path, class: "text-blue-500 hover:underline" %>
+  </footer>
+</div>
 
 </body>
 </html>
