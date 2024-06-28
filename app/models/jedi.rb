@@ -1,17 +1,17 @@
 class Jedi < ApplicationRecord
-    self.table_name = 'people'
-  
-    # Add validations, associations, and methods as needed
-    validates :name, presence: true
-  
-    # Example association (assuming people have a homeworld)
-    belongs_to :homeworld, class_name: 'Planet', foreign_key: 'homeworld_id'
-  
-    # Active Storage association
-    has_one_attached :image
-  
-    # Add any additional methods or scopes as needed
-    def wield_lightsaber
-      "#{name} wields a #{lightsaber_color} lightsaber."
-    end
+  self.table_name = 'jedis'  # Set the table name to 'jedis'
+
+  # Validations
+  validates :name, presence: true
+  validates :lightsaber_color, presence: true
+  validates :homeworld, presence: true
+
+  # Active Storage association
+  has_one_attached :image
+
+  # Add any additional methods or scopes as needed
+  def jedi_story
+    "#{name} is a Jedi from #{homeworld}. #{name} wields a #{lightsaber_color} lightsaber."
+    # Add more details about the Jedi's story here
   end
+end

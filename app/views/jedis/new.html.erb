@@ -1,0 +1,44 @@
+<!-- app/views/jedis/new.html.erb -->
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-3xl font-semibold mb-4">New Jedi Profile</h1>
+
+  <%= form_with(model: @jedi, url: jedis_path, local: true, html: { class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" }) do |form| %>
+    <% if @jedi.errors.any? %>
+      <div id="error_explanation" class="mb-4">
+        <h2 class="text-red-600"><%= pluralize(@jedi.errors.count, "error") %> prohibited this jedi profile from being saved:</h2>
+
+        <ul class="list-disc list-inside text-red-600">
+          <% @jedi.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= form.label :name, class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :homeworld, class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_field :homeworld, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :lightsaber_color, class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_field :lightsaber_color, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :image, class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.file_field :image, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-6 text-center">
+      <%= form.submit "Create Jedi Profile", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back', jedis_path, class: "text-gray-500 hover:underline" %>
+</div>

@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   resources :vehicles, only: [:index, :show]
   resources :starships, only: [:index, :show]
   resources :species, only: [:index, :show]
+  resources :jedis 
 end

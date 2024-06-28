@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_191415) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_024413) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -73,6 +73,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_191415) do
     t.text "opening_crawl"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "jedis", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "force_sensitive"
+    t.string "name"
+    t.string "homeworld"
+    t.string "lightsaber_color"
+    t.text "jedi_story"
   end
 
   create_table "people", force: :cascade do |t|
