@@ -46,6 +46,11 @@ class JedisController < ApplicationController
       @jedi.destroy
       redirect_to jedis_url, notice: 'Jedi profile was successfully deleted.'
     end
+
+    # GET /jedis
+  def index
+    @jedis = Jedi.order(:name)
+  end
   
     private
   
