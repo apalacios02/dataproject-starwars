@@ -1,7 +1,16 @@
 class Vehicle < ApplicationRecord
+
+    def self.ransackable_associations(auth_object = nil)
+        ["films", "people"]
+      end
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["cost_in_credits", "created_at", "id", "id_value", "length", "manufacturer", "model", "updated_at", "vehicle_class"]
+      end
+
     # Associations
     has_and_belongs_to_many :films
-    has_and_belongs_to_many :pilots
+    has_and_belongs_to_many :people
   
     # Validations
     validates :name, presence: true, uniqueness: true

@@ -1,4 +1,13 @@
 class Planet < ApplicationRecord
+
+    def self.ransackable_associations(auth_object = nil)
+        ["films", "residents"]
+      end
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["climate", "created_at", "diameter", "gravity", "id", "id_value", "name", "orbital_period", "population", "rotation_period", "surface_water", "terrain", "updated_at"]
+      end
+
     # Validations
     validates :name, presence: true, uniqueness: true
     validates :climate, presence: true

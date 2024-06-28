@@ -1,5 +1,15 @@
 class Person < ApplicationRecord
-     # Validations
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["birth_year", "created_at", "eye_color", "gender", "hair_color", "height", "id", "id_value", "is_jedi", "is_sith", "mass", "name", "skin_color", "updated_at"]
+      end
+    
+      def self.ransackable_associations(auth_object = nil)
+        ["films", "homeworld", "starships", "vehicles"]
+      end
+    
+
+    # Validations
     validates :name, presence: true
     validates :height, presence: true
     validates :mass, presence: true

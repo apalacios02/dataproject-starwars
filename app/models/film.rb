@@ -1,6 +1,15 @@
 class Film < ApplicationRecord
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["created_at", "director", "id", "id_value", "opening_crawl", "producer", "release_date", "title", "updated_at"]
+      end
+      
+    def self.ransackable_associations(auth_object = nil)
+        ["people", "planets", "starships", "vehicles"]
+      end
+
     # Associations
-    has_and_belongs_to_many :characters
+    has_and_belongs_to_many :people
     has_and_belongs_to_many :planets
     has_and_belongs_to_many :starships
     has_and_belongs_to_many :vehicles
