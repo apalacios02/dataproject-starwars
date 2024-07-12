@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'about_pages/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'species/index'
@@ -13,7 +14,9 @@ Rails.application.routes.draw do
   get 'planets/show'
   get 'people/index'
   get 'people/show'
+  get '/about', to: 'about_pages#show'
   root 'home#index'
+
 
   resources :people, only: [:index, :show]
   resources :planets, only: [:index, :show]
